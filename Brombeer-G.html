@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Einkaufsliste</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            background-color: #f5f1e9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 2vw;
+        }
+        h1 {
+            font-size: 10vw;
+            margin-top: 5vw;
+        }
+        .counter-container {
+            font-size: 6vw;
+            margin: 5vw 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .counter-container button {
+            font-size: 5vw;
+            padding: 2vw;
+            margin: 0 2vw;
+            border: 2px solid #000;
+            background-color: transparent;
+            border-radius: 50%; /* Runde Buttons */
+            width: 12vw; /* Breite und Höhe gleich für runde Buttons */
+            height: 12vw;
+            cursor: pointer;
+        }
+        .counter-container span {
+            font-size: 6vw;
+            min-width: 40px; /* Feste Breite für bessere Stabilität */
+        }
+        #ingredients {
+            text-align: left;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .ingredient-container {
+            display: flex;
+            justify-content: space-between;
+            font-size: 6vw;
+            margin-bottom: 5vw;
+            padding: 1vw 0;
+        }
+        .ingredient {
+            text-align: left;
+            font-weight: 400;
+        }
+        .amount {
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Brombeer-Gin</h1>
+
+    <div class="counter-container">
+        <button onclick="adjustAmount(-1)">-</button>
+        <span id="personCount">1</span> Person
+        <button onclick="adjustAmount(1)">+</button>
+    </div>
+
+    <div id="ingredients">
+        <div class="ingredient-container">
+            <span><span id="gin" class="amount">3</span> <span class="ingredient">cl Gin</span></span>
+        </div>
+        <div class="ingredient-container">
+            <span><span id="brombeeraufstrich" class="amount">1</span> <span class="ingredient">TL Brombeeraufstrich</span></span>
+        </div>
+        <div class="ingredient-container">
+            <span><span id="eiswuerfel" class="amount">1</span> <span class="ingredient">Eiswürfel</span></span>
+        </div>
+        <div class="ingredient-container">
+            <span><span id="tonic" class="amount">1</span> <span class="ingredient">Tonic-Water (nach Geschmack)</span></span>
+        </div>
+        <div class="ingredient-container">
+            <span><span id="limettensaft" class="amount">1</span> <span class="ingredient">TL Limettensaft</span></span>
+        </div>
+        <div class="ingredient-container">
+            <span><span id="limettenscheibe" class="amount">1</span> <span class="ingredient">Limettenscheibe</span></span>
+        </div>
+        <div class="ingredient-container">
+            <span><span id="minze" class="amount">1</span> <span class="ingredient">Minzstängel</span></span>
+        </div>
+        <div class="ingredient-container">
+            <span><span id="brombeeren" class="amount">3</span> <span class="ingredient">frische Brombeeren</span></span>
+        </div>
+    </div>
+</div>
+
+<script>
+    const baseValues = {
+        gin: 3,
+        brombeeraufstrich: 1,
+        eiswuerfel: 1,
+        tonic: 1,
+        limettensaft: 1,
+        limettenscheibe: 1,
+        minze: 1,
+        brombeeren: 3
+    };
+
+    function adjustAmount(change) {
+        let personCount = parseInt(document.getElementById('personCount').innerText);
+        personCount = Math.max(1, personCount + change);  // Minimum 1 Person
+        document.getElementById('personCount').innerText = personCount;
+
+        // Adjust ingredient amounts
+        document.getElementById('gin').innerText = baseValues.gin * personCount;
+        document.getElementById('brombeeraufstrich').innerText = baseValues.brombeeraufstrich * personCount;
+        document.getElementById('eiswuerfel').innerText = baseValues.eiswuerfel * personCount;
+        document.getElementById('tonic').innerText = baseValues.tonic * personCount;
+        document.getElementById('limettensaft').innerText = baseValues.limettensaft * personCount;
+        document.getElementById('limettenscheibe').innerText = baseValues.limettenscheibe * personCount;
+        document.getElementById('minze').innerText = baseValues.minze * personCount;
+        document.getElementById('brombeeren').innerText = baseValues.brombeeren * personCount;
+    }
+</script>
+
+</body>
+</html>
